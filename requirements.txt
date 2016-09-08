@@ -4,3 +4,4 @@ requests==2.11.1
 freezegun==0.3.7
 HTTPretty==0.8.14
 pytz==2016.6.1
+Flask-SSLify==0.1.6
