@@ -155,11 +155,11 @@
   <div onclick="minimize()" class="icon">
       <img height="48px" width="48px "src="static/mini.svg">
   </div>
-  <div id="location" style="display: none;">{{ location }}</div>
+  <div id="info_location" style="display: none;"> {{ info_location }} </div>
   <script type="text/javascript">
   var directory = '~';
   var hostname = "something@sthacks";
-  var location = document.querySelector("#location").innerHTML;
+  var info_location = document.querySelector("#info_location").innerHTML;
   var prompt = document.createElement("p");
   prompt.innerHTML = hostname + ":~ $" + '<span id="status" contenteditable onblur="this.focus();"></span>';
   document.querySelector('.stdout').appendChild(prompt);
@@ -209,13 +209,13 @@
              break;
          case "./getInfo.sh":
              if(directory === "~") {
-                 output.innerHTML = "STATUS: "+ location;
+                 output.innerHTML = "STATUS: "+ info_location;
                  stdout.appendChild(output);
              }
              break;
          case "./secret.sh":
              if(directory === "/etc/secret") {
-                 output.innerHTML = "secret";
+                 output.innerHTML = "cowsays moo";
                  stdout.appendChild(output);
              }
              break;

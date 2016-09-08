@@ -10,16 +10,16 @@ app = Flask(__name__)
 @app.route('/webbook/')
 def webhookHandler():
     system("git pull")
-    return "Ok",200
+    return "Ok", 200
 
 
 @app.route('/')  # serve at root of website
 def home():
     if isSunset():
         location = choice(locations)
-        return render_template('base.html', location=location), 200
+        return render_template('base.html', info_location=location), 200
     else:
-        return render_template('base.html', location="Try again later"), 403
+        return render_template('base.html', info_location="Try again later"), 403
 
 
 if __name__ == '__main__':  # only run if this is being run as the main app
