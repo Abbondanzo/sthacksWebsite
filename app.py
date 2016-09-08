@@ -1,13 +1,13 @@
 from flask import Flask, render_template
 from config import locations, port
-from os import system
+from os import path, system
 from random import choice
 from v1.sunset import isSunset
 
 app = Flask(__name__)
 
 
-@app.route('/webbook')
+@app.route('/webbook/')
 def webhookHandler():
     system("git pull")
     return "Ok",200
@@ -23,5 +23,8 @@ def home():
 
 
 if __name__ == '__main__':  # only run if this is being run as the main app
-    context = ('signed.crt', 'domain.key')
+    if path.isfile('signed.crt') and path.isfile('domain.key'):  # if the real keys exist
+        context = ('signed.crt', 'domain.key')
+    else:
+        context = ('selfSigned.crt', 'selfSigned.key')
     app.run(port=port, host='0.0.0.0', ssl_context=context, use_reloader=True)
