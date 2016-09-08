@@ -6,9 +6,9 @@ URL = [sthacks website](sthacks.nu/)
 
 ### Authors
 ##### [David Dworken](mailto:dworken.d@husky.neu.edu):
-* Poking the bear
-* Routing
-* Cyber
+* Poking: 
+   * Computer's buttons
+   * Jacob's buttons
 
 
 ##### [Jacob Aronoff](mailto:aronoff.j@husky.neu.edu):
