@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #000;
+      }
+
+      .cls-2, .cls-3 {
+        font-size: 5.887px;
+      }
+
+      .cls-3 {
+        fill: #fff;
+        text-anchor: middle;
+        font-family: "TimesNewRomanPS-BoldMT";
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+    </style>
+  </defs>
+  <rect width="64" height="64" rx="4" ry="4" class="cls-1"/>
+  <text transform="translate(26 30) scale(4.25)" class="cls-2"><tspan x="0" class="cls-3">&gt;_</tspan></text>
+</svg>

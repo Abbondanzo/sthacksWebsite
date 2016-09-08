@@ -1,5 +1,292 @@
+<!DOCTYPE html>
 <html>
-<h1>
-{{ location }}
-</h1>
+<head>
+    <title>sthacks</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link href="favicon.ico" rel="icon">
+    <style>
+    html {
+        height: 100%;
+    }
+    body {
+        margin: 0;
+        background: #111;
+        color: #fff;
+        font-family: 'Source Code Pro', sans-serif;
+        font-weight: 300;
+        height: 100%;
+        font-size: 14px;
+    }
+    kalibaby {
+        background: url('http://cdn.wallpapersafari.com/21/54/asMIy9.jpg') center center no-repeat;
+        background-size: cover;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+    }
+    p {
+        margin: 0;
+    }
+    span[contenteditable], span[contenteditable]:active {
+        outline: none;
+        display: inline-block;
+        color: transparent;
+    }
+    span {
+        outline: none;
+    }
+    .stdout span {
+        margin-left: 4px;
+        text-shadow: 0 0 #fff;
+    }
+    span[contenteditable]::after{
+        content: "a";
+        color: #fff;
+        background: #fff;
+        margin-left: 2px;
+        animation: blink 0.55s infinite steps(1) alternate;
+    }
+    span br {
+        display: none;
+    }
+    @keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+    }
+    .terminal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+      -o-transform: translate(-50%,-50%);
+      min-width: 600px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .head {
+      background: #222;
+      line-height: 16px;
+      padding: 4px 10px;
+    }
+    .stdout {
+      padding: 10px;
+      background: #333;
+      height: 300px;
+      overflow-y: scroll;
+    }
+    .expanded {
+        width: 100%;
+        height: 100%;
+    }
+    .close,.minimize,.expand {
+      content:'';
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      display: inline-block;
+      margin: 4px;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+    .close {
+        background: #fd5f57;
+    }
+    .minimize {
+        background: #febd2d;
+    }
+    .expand {
+        background: #2dcd3d;
+    }
+    .terminal.mini {
+        display: none;
+    }
+    .icon {
+        display: none;
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        cursor: pointer;
+        border: 2px solid #fff;
+        border-radius: 4px;
+    }
+    .icon.show {
+        display: block;
+        width: 48px;
+        height: 48px;
+    }
+    .icon.show:hover {
+        opacity: 0.8;
+    }
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: #666;
+    }
+    ::-webkit-scrollbar-trackpiece{
+    	background-color: rgba(0,40,0,0.5);
+    	border-radius:18px;
+    }
+  </style>
+</head>
+<body>
+    <kalibaby>
+    </kalibaby>
+  <div class="terminal">
+    <div class="head"><span onclick="closet()" class="close"></span><span onclick="minimize()" class="minimize"></span><span onclick='expand()' class="expand"></span></div>
+    <div class="stdout">
+    </div>
+  </div>
+  <div onclick="minimize()" class="icon">
+      <img height="48px" width="48px "src="mini.svg">
+  </div>
+  <script type="text/javascript">
+  var directory = '~';
+  var hostname = "something@sthacks";
+  var prompt = document.createElement("p");
+  prompt.innerHTML = hostname + ":~ $" + '<span id="status" contenteditable onblur="this.focus();"></span>';
+  document.querySelector('.stdout').appendChild(prompt);
+  document.querySelector('#status').focus();
+  var sq = document.querySelector('span[contenteditable]');
+  sq.addEventListener('keyup',function(e) {
+      var code = e.which; // recommended to use e.which, it's normalized across browsers
+      if(code==13) {
+          e.preventDefault();
+          sq.removeAttribute('contenteditable');
+          var input = this.innerHTML.replace(/<.*?>/g,'');
+          console.log(input);
+          evaluateInput(input);
+      }
+  });
+  function evaluateInput(input) {
+     var stdout = document.querySelector(".stdout");
+     var output = document.createElement("p");
+     var end = input.indexOf(" ") === -1 ? input.length : input.indexOf(" ");
+     switch(input.slice(0, end)) {
+         case "cd":
+             var dir = input.slice(end + 1);
+             if(dir.length > 0) {
+                 switch(dir) {
+                     case "~":
+                     case "/etc/secret":
+                     case "/etc/secret/":
+                         directory = dir.replace(/\/$/, "");
+                         break;
+                     default:
+                         output.innerHTML = dir + " was not found";
+                         stdout.appendChild(output);
+                         break;
+                 }
+             }
+             else {
+                 output.innerHTML = directory;
+                 stdout.appendChild(output);
+             }
+             break;
+         case "ls":
+             output.innerHTML = "secret.sh";
+             if(directory === "~") {
+                 output.innerHTML = "getInfo.sh";
+             }
+             stdout.appendChild(output);
+             break;
+         case "./getInfo.sh":
+             if(directory === "~") {
+                 output.innerHTML = "STATUS: "+ {{ location }};
+                 stdout.appendChild(output);
+             }
+             break;
+         case "./secret.sh":
+             if(directory === "/etc/secret") {
+                 output.innerHTML = "secret";
+                 stdout.appendChild(output);
+             }
+             break;
+         case "cls":
+             stdout.innerHTML = "";
+             break;
+         /* case "sudo":
+         case "su":
+            var dir = input.slice(end + 1);
+            console.log(dir);
+            if(dir.length>0) {
+                switch (dir) {
+                    case "rm -rf":
+                        alert('test');
+                        break;
+                    default:
+
+                }
+            } else {
+                output.innerHTML = "Password: <span class='pass' contenteditable onblur='this.focus();'></span>";
+                stdout.appendChild(output);
+            }
+            break;*/
+         default:
+             output.innerHTML = "";
+             if(input.length > 0) {
+                 output.innerHTML = "shell: " + input.slice(0, end) + ": not found";
+             }
+             stdout.appendChild(output);
+             break;
+     }/*
+     var passExist = document.getElementsByClassName('pass');
+     if(passExist.length>0) {
+         document.querySelector('span[contenteditable]').focus();
+     } else {*/
+         var prompt = document.createElement("p");
+         prompt.innerHTML = hostname + ":" + directory + " $<span contenteditable onblur='this.focus();'></span>";
+         stdout.appendChild(prompt);
+         prompt.querySelector('span').focus();
+     var sq = document.querySelector('span[contenteditable]');
+     sq.addEventListener('keyup',function(e) {
+         var code = e.which; // recommended to use e.which, it's normalized across browsers
+         if(code === 13) {
+             e.preventDefault();
+             sq.removeAttribute('contenteditable');
+             var input = this.innerHTML.replace(/<.*?>/g,'');
+             console.log(input);
+             evaluateInput(input);
+         }
+     });
+    }
+  function closet() {
+      document.querySelector('.terminal').innerHTML = 'goodbye;';
+
+  }
+  function minimize() {
+      if(document.querySelector('.terminal').classList.contains('mini')) {
+          document.querySelector('.terminal').className = 'terminal';
+          document.querySelector('.icon').className = 'icon';
+      } else {
+          document.querySelector('.terminal').className += ' mini';
+          document.querySelector('.icon').className += ' show';
+      }
+  }
+  function expand() {
+       if(document.querySelector('.terminal').classList.contains('expanded')) {
+           document.querySelector('.terminal').className = 'terminal';
+           document.querySelector('.stdout').className = 'stdout';
+       } else {
+           document.querySelector('.terminal').className += ' expanded';
+           document.querySelector('.stdout').className += ' expanded';
+       }
+  }
+  </script>
+</body>
 </html>
