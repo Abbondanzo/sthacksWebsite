@@ -6,7 +6,6 @@ class TestSthacksApp(unittest.TestCase):
 
     def setUp(self):
         self.app = app.test_client()
-        print('SETUP')
 
     def tearDown(self):
         del self.app
