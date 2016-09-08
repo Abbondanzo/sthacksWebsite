@@ -21,10 +21,7 @@ class TestSthacksApp(unittest.TestCase):
                                body='{"results": {"civil_twilight_end": "11:33:27 PM"}}',
                                content_type="application/json")
         response = self.app.get('/')
-        print('- '*10)
-        print([getattr(response, item) for item in dir(response)])
-        print('- '*10)
-        text = response.response[0]
+        text = response.data
         self.assertEqual(response.status_code, 403)
         self.assertIn("Try again later", text)
 
@@ -35,9 +32,6 @@ class TestSthacksApp(unittest.TestCase):
                                body='{"results": {"civil_twilight_end": "11:33:27 PM"}}',
                                content_type="application/json")
         response = self.app.get('/')
-        print('- '*10)
-        print([getattr(response, item) for item in dir(response)])
-        print('- '*10)
-        text = response.response[0]
+        text = response.data
         self.assertEqual(response.status_code, 200)
         self.assertIn(locations[0], text)

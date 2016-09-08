@@ -2,6 +2,7 @@ import requests
 import json
 from datetime import datetime
 from pytz import timezone
+from pprint import pprint
 
 url = "http://api.sunrise-sunset.org/json?lat=42.340955&lng=-71.090507&date=today"
 
@@ -27,12 +28,10 @@ def isSunset():
     is_evening = 'PM' in time
     same_hours = sunset_hours == current_hours
     is_wednesday = currentTime.isoweekday() == 3
-    print('- ' * 20)
-    print(show_time)
-    print(current_minutes)
-    print(sunset_minutes)
-    print(is_evening)
-    print(same_hours)
-    print(is_wednesday)
-    print('- ' * 20)
     return show_time and is_evening and same_hours and is_wednesday
+
+
+def print_obj_info(obj):
+    print('- ' * 10)
+    pprint([{item: getattr(obj, item)} for item in dir(obj)])
+    print('- ' * 10)
