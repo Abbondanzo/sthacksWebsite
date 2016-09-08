@@ -1,7 +1,7 @@
 # sthacks Website
 Python and Flask server to run the server
 
-URL = [sthacks website](www.sthacks.nu/)
+URL = [sthacks website](sthacks.nu/)
 
 
 ### Authors
