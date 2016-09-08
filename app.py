@@ -22,7 +22,8 @@ def home():
     # Cminutes = sunset_minutes - 5 # debugging
     # if PM (because sunset) and correct hour, and is wednesday
     if 'PM' in time and sunset_hours == current_hours and currentTime.isoweekday() == 3:
-        if sunset_minutes - 10 < current_minutes < sunset_minutes:  # if within 10 minutes of sthacks
+        if sunset_minutes - 10 < current_minutes < sunset_minutes:
+            # if within 10 minutes of sthacks
             return "Sthacks!"
     else:
         return "No sthacks"
