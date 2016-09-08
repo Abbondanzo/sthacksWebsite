@@ -31,9 +31,7 @@ def home():
 
 def getTimeOfSunset():  # returns time of sunset in the form of "11:33:27 PM"
     # hit up the API to get the time
-    url = """
-    http://api.sunrise-sunset.org/json?lat=42.340955&lng=-71.090507&date=today
-    """
+    url = "http://api.sunrise-sunset.org/json?lat=42.340955&lng=-71.090507&date=today"
     get = requests.get(url)
     apiResp = json.loads(get.text)  # parse the JSON
     # return the time of sunset in the city
