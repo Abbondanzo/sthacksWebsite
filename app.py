@@ -16,4 +16,4 @@ def home():
 
 
 if __name__ == '__main__':  # only run if this is being run as the main app
-    app.run(port=port, debug=True)
+    app.run(port=port, host='0.0.0.0')
