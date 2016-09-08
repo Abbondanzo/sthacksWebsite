@@ -3,7 +3,7 @@
 <head>
     <title>sthacks</title>
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
-    <link href="favicon.ico" rel="icon">
+    <link href="static/favicon.ico" rel="icon">
     <style>
     html {
         height: 100%;
@@ -153,11 +153,13 @@
     </div>
   </div>
   <div onclick="minimize()" class="icon">
-      <img height="48px" width="48px "src="mini.svg">
+      <img height="48px" width="48px "src="static/mini.svg">
   </div>
+  <div id="info_location" style="display: none;"> {{ info_location }} </div>
   <script type="text/javascript">
   var directory = '~';
   var hostname = "something@sthacks";
+  var info_location = document.querySelector("#info_location").innerHTML;
   var prompt = document.createElement("p");
   prompt.innerHTML = hostname + ":~ $" + '<span id="status" contenteditable onblur="this.focus();"></span>';
   document.querySelector('.stdout').appendChild(prompt);
@@ -207,13 +209,13 @@
              break;
          case "./getInfo.sh":
              if(directory === "~") {
-                 output.innerHTML = "STATUS: "+ {{ location }};
+                 output.innerHTML = "STATUS: "+ info_location;
                  stdout.appendChild(output);
              }
              break;
          case "./secret.sh":
              if(directory === "/etc/secret") {
-                 output.innerHTML = "secret";
+                 output.innerHTML = "cowsays moo";
                  stdout.appendChild(output);
              }
              break;

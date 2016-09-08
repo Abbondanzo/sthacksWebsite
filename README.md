@@ -19,13 +19,21 @@ URL = [sthacks website](http://sthacks.nu/)
 
 
 ##### [Sam Caccavale](mailto:caccavale.s@husky.neu.edu):
-* ...
+* 
 
 ##### [Matt Berry](mailto:berry.matt@husky.neu.edu):
 * Owns domain
 * Setups __CNAME__
 * Trys to learn git
 * Avid CS GO player
+
+##### [Peter Abbondanzo](mailto:abbondanzo.p@husky.neu.edu):
+* Html Lord
+* Long ass last name
+
+##### [Taha Vasowalla](mailto:vasowalla.t@husky.neu.edu):
+* Javascript King
+* Loves Origami (not the facebook application)
 
 
 ### Purpose
@@ -40,16 +48,14 @@ URL = [sthacks website](http://sthacks.nu/)
 ##### This is our logo:
 
 ~~~
- _________ 
+ _________
 < sthacks >
- --------- 
-    \
-     \
-    ^__^         /
-    (oo)\_______/  _________
-    (__)\       )=(  ____|_ \_____
-        ||----w |  \ \     \_____ |
-        ||     ||   ||           ||
+ ---------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
 ~~~
 
 
