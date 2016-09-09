@@ -4,7 +4,13 @@
     <title>sthacks</title>
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
     <link href="static/favicon.ico" rel="icon">
-    <meta name="theme-color" content="#222">
+    <!-- Android Chrome -->
+    <meta name="theme-color" content="#222222">
+    <!-- Windows Phone...hah -->
+    <meta name="msapplication-navbutton-color" content="#222222" />  
+    <!-- iOS Safari -->  
+    <meta name="apple-mobile-web-app-capable" content="yes">  
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <style>
     html {
         height: 100%;
@@ -19,7 +25,7 @@
         font-size: 14px;
     }
     kalibaby {
-        background: url('http://cdn.wallpapersafari.com/21/54/asMIy9.jpg') center center no-repeat;
+        background: url('static/not_the_bg.jpg') center center no-repeat;
         background-size: cover;
         position: fixed;
         width: 100%;
@@ -85,6 +91,7 @@
     .expanded {
         width: 100%;
         height: 100%;
+        background: rgba(51, 51, 51, 0.3);
     }
     .close,.minimize,.expand {
       content:'';
